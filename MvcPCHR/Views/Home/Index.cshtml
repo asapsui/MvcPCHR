@@ -1,0 +1,48 @@
+﻿@model PatientTbl
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    @ViewBag.ConnectionString
+</div>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Your Health Record!</h1>
+</div>
+
+
+<body> 
+    <script>
+        // This script using javascript checks if each textbox is filled
+        function validateForm() {
+            let x = document.forms["loginform"]["Username"].value;
+            let y = document.forms["loginform"]["Password"].value;
+            if (x == "" || y == "") {
+               alert("All textboxes must be filled!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <div class="text-center">
+        <!-- using POST for the method, since GET would expose the user's password through the url and in the default server logs-->
+        <!-- <form name="loginform" action="home/Validate" -->
+        <form asp-controller="Home" asp-action="Account" name="loginform" onsubmit="return validateForm()" method="post">
+            <label for="username"> Username: </label> <br>
+            <input type="text" id="username" name="Username" placeholder="Enter Username..." class="mytext"> <br>
+            <label for="password"> Password: </label> <br>
+            <input type="password" id="password" name="Password" placeholder="Enter Password..." class="mytext">
+            <br />
+            <br />
+
+            <!-- use the name "login" or "submit" for error handling when we use in C#-->
+            <button type="submit" name="login" class="loginbutton">Login</button>
+           <!-- <input type="submit" name="submit" value="Login" /> -->
+        </form>
+    </div>
+   
+    <br />
+    <h2> New User? </h2>
+    <br />
+    <button type="submit" name="register" class="registerbutton">Register</button>
+</body>

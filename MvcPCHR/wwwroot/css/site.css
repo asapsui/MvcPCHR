@@ -1,0 +1,50 @@
+/*
+    This is the stylesheet for the application
+
+    TODO:
+    - revise the .mytext, form, .loginbutton, .registerbutton elements
+*/
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+form {
+
+    text-align: center;
+    display: inline-block;
+}
+
+.mytext {
+    width: 300px;
+    font-size: 18pt;
+}
+
+.loginbutton {
+    display: block;
+    width: 300px;
+    height: 42px;
+}
+
+
+.registerbutton {
+    display: block;
+    width: 300px;
+    height: 42px;
+    margin-left: 500px;
+}
