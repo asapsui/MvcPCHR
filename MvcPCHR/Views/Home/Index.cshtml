@@ -24,13 +24,14 @@
             return true;
         }
     </script>
+<div class="row">
     <div class="text-center">
         <!-- using POST for the method, since GET would expose the user's password through the url and in the default server logs-->
         <!-- <form name="loginform" action="home/Validate" -->
         <form asp-controller="Home" asp-action="Account" name="loginform" onsubmit="return validateForm()" method="post">
-            <label for="username"> Username: </label> <br>
+            <label for="username"> Username </label> <br>
             <input type="text" id="username" name="Username" placeholder="Enter Username..." class="mytext"> <br>
-            <label for="password"> Password: </label> <br>
+            <label for="password"> Password </label> <br>
             <input type="password" id="password" name="Password" placeholder="Enter Password..." class="mytext">
             <br />
             <br />
@@ -39,10 +40,10 @@
             <button type="submit" name="login" class="loginbutton">Login</button>
            <!-- <input type="submit" name="submit" value="Login" /> -->
         </form>
+        <br />
+        <h2> New User? </h2>
+        <br />
+        <button type="submit" name="register" class="registerbutton" onclick="@("window.location.href='" + @Url.Action("Index", "Register") + "'");">Register</button>
     </div>
-   
-    <br />
-    <h2> New User? </h2>
-    <br />
-    <button type="submit" name="register" class="registerbutton">Register</button>
+ </div>
 </body>

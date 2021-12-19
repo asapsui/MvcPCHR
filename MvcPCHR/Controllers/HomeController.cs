@@ -4,6 +4,7 @@ using System.Diagnostics;
 //using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Web;
 
 // this will act as our login screen
 
@@ -21,21 +22,27 @@ namespace MvcPCHR.Controllers
 
         // GET: /Login/
         [HttpGet]
+        //[ActionName("Home")]
         public IActionResult Index()
         {
             return View();
         }
 
+        
         [HttpPost]
         [ActionName("Account")]
         public string ValidateLogin()
         {
+            // this method is validating with the database the login information the user has provided
+
             string username = Request.Form["username"];
 
             // need to hash this password 
             string password = Request.Form["password"];
             var cs = Configuration.GetConnectionString("DefaultConnection");
             SqlConnection connection = new SqlConnection(cs);
+           
+
 
             string selectStatement
                 = "SELECT * FROM dbo.PATIENT_TBL WHERE USERNAME=@Username AND PASSWORD =@Password;";
@@ -53,7 +60,10 @@ namespace MvcPCHR.Controllers
 
                 if (!String.IsNullOrEmpty(userName))
                 {
-                    return "This login exists";
+                    // use formsauthentication class to set the cookie
+                    // redirect to the personal details page
+                    return "your logged in";
+                   
                 }
             }
             catch (SqlException ex)
@@ -64,10 +74,11 @@ namespace MvcPCHR.Controllers
             {
                 connection.Close();
             }
-            return "Wrong password or username.";
+            // redirect to the login view, which is the home view
+            return "not in database";
+            
            
         }
-    
     
         public IActionResult PersonalDetails()
         {

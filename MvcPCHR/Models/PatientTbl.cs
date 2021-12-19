@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MvcPCHR.Models
 {
@@ -18,6 +19,7 @@ namespace MvcPCHR.Models
         public string PatientId { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string FirstName { get; set; } = null!;
+        [Required]
         public DateTime? DateOfBirth { get; set; }
         public string? AddressStreet { get; set; }
         public string? AddressCity { get; set; }
@@ -26,7 +28,9 @@ namespace MvcPCHR.Models
         public string? PhoneHome { get; set; }
         public string? PhoneMobile { get; set; }
         public string? PrimaryId { get; set; }
+        [Required]
         public string? Username { get; set; }
+        [Required]
         public string? Password { get; set; }
 
         public virtual PerDetailsTbl PerDetailsTbl { get; set; } = null!;

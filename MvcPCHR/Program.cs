@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MvcPCHR.Models;
 using System.Configuration;
@@ -14,10 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PCHRDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// this is for our authentication dbcontext
+builder.Services.AddDbContext<AuthDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// this is to bind our identity with our dbcontext
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<PCHRDBContext>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 
 
 var app = builder.Build();
@@ -34,6 +41,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// this is to enable authentication
+app.UseAuthentication();
 
 app.UseAuthorization();
 
