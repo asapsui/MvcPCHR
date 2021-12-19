@@ -3,7 +3,7 @@ using MvcPCHR.Models;
 using System.Diagnostics;
 using System.Data.SqlClient;
 
-// this will act as our login
+// this can be deleted
 
 namespace MvcPCHR.Controllers
 {

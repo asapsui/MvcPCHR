@@ -31,7 +31,7 @@ namespace MvcPCHR.Controllers
         
         [HttpPost]
         [ActionName("Account")]
-        public string ValidateLogin()
+        public IActionResult ValidateLogin()
         {
             // this method is validating with the database the login information the user has provided
 
@@ -62,7 +62,7 @@ namespace MvcPCHR.Controllers
                 {
                     // use formsauthentication class to set the cookie
                     // redirect to the personal details page
-                    return "your logged in";
+                    return RedirectToAction("Privacy", "Home");
                    
                 }
             }
@@ -75,7 +75,8 @@ namespace MvcPCHR.Controllers
                 connection.Close();
             }
             // redirect to the login view, which is the home view
-            return "not in database";
+            ViewBag.ErrorMessage = "Login failed. Please try again or register below.";
+            return RedirectToAction("Index","Home");
             
            
         }

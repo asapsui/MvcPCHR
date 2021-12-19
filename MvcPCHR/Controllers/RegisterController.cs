@@ -1,21 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using MvcPCHR.Models;
+using System.Data;
 
 namespace MvcPCHR.Controllers
 {
     public class RegisterController : Controller
     {
-        //
-        // GET: /Register/
-        //[HttpGet]
-        //[ActionName("Signup")]
-        /*
-        public string Index()
+        // using dependency injection to inject my PCHRDBContext to my RegisterController
+        private readonly PCHRDBContext _context;
+
+        public RegisterController(PCHRDBContext context)
         {
-            return "Hello from register.index";
-            //return View();
+            _context = context;
         }
-        */
 
 
         public IActionResult Index()
@@ -24,27 +22,38 @@ namespace MvcPCHR.Controllers
 
         }
 
-       // create a new patient object and using the user's input on the form to fill in some information
-        public IActionResult Create()
-        {
-            PatientTbl patient = new PatientTbl();
-
-        }
-        /*
-        // POST: 
+        // create a new patient object and using the user's input on the form to fill in some information
         [HttpPost]
-        public IActionResult Index(RegisterViewModel model)
+        public IActionResult Create(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            // TODO: Map the view model to a domain model and pass to a repository
-            // Personally I use and like AutoMapper very much (http://automapper.codeplex.com)
-
-            return RedirectToAction("Success");
-         }
-        */
+            //using the context instance of PCHR
+            using (_context)
+            {
+                try
+                {
+                    // creating an instance of my patient model
+                    PatientTbl patient = new PatientTbl();
+                    patient.Username = Request.Form["Username"];
+                    patient.Password = Request.Form["Password"];
+                    patient.PatientId = Request.Form["PatientId"];
+                    patient.FirstName = Request.Form["Firstname"];
+                    patient.LastName = Request.Form["Lastname"];
+                    DateTime dateInput = DateTime.Parse(Request.Form["DateOfBirth"]);
+                    patient.DateOfBirth = dateInput;
+                    _context.PatientTbls.Add(patient);
+                    _context.SaveChanges();
+                }
+                catch (SqlException ex)
+                {
+                    throw ex;
+                }
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

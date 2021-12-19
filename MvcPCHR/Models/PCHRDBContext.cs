@@ -30,7 +30,7 @@ namespace MvcPCHR.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
+                optionsBuilder.UseSqlServer("Name=DefaultConnection");
             }
         }
 

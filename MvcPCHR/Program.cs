@@ -12,12 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
  * 
  * So now our DbContext will be configured with the connectionstring
  */
+
 builder.Services.AddDbContext<PCHRDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+/*
+builder.Services.AddDbContext<PCHRDBContext>(options =>
+options.UseSqlServer(System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString));
+*/
 // this is for our authentication dbcontext
+/*
 builder.Services.AddDbContext<AuthDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+*/
 
 // this is to bind our identity with our dbcontext
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<PCHRDBContext>();

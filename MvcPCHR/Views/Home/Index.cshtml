@@ -1,6 +1,6 @@
-﻿@model PatientTbl
+﻿@model MvcPCHR.Models.LoginViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
 }
 <div>
     @ViewBag.ConnectionString
@@ -9,9 +9,8 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to Your Health Record!</h1>
 </div>
+<hr />
 
-
-<body> 
     <script>
         // This script using javascript checks if each textbox is filled
         function validateForm() {
@@ -28,22 +27,42 @@
     <div class="text-center">
         <!-- using POST for the method, since GET would expose the user's password through the url and in the default server logs-->
         <!-- <form name="loginform" action="home/Validate" -->
-        <form asp-controller="Home" asp-action="Account" name="loginform" onsubmit="return validateForm()" method="post">
+        <!--
+            <form asp-controller="Home" asp-action="Account" name="loginform" onsubmit="return validateForm()" method="post">
             <label for="username"> Username </label> <br>
             <input type="text" id="username" name="Username" placeholder="Enter Username..." class="mytext"> <br>
             <label for="password"> Password </label> <br>
             <input type="password" id="password" name="Password" placeholder="Enter Password..." class="mytext">
-            <br />
-            <br />
+            -->
 
+        <form asp-action="Account" asp-controller="Home" name="registerform">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label">Username</label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Password" class="control-label">Password</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br />
             <!-- use the name "login" or "submit" for error handling when we use in C#-->
-            <button type="submit" name="login" class="loginbutton">Login</button>
+        <div class="form-group">
+            <button type="submit" name="login" class="btn btn-primary">Login</button>
+            <!-- class="loginbutton" --> 
            <!-- <input type="submit" name="submit" value="Login" /> -->
+        </div>
         </form>
         <br />
         <h2> New User? </h2>
         <br />
-        <button type="submit" name="register" class="registerbutton" onclick="@("window.location.href='" + @Url.Action("Index", "Register") + "'");">Register</button>
+        <button type="submit" name="register" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Index", "Register") + "'");">Register</button>
     </div>
  </div>
-</body>
+
+ @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -19,8 +19,9 @@ namespace MvcPCHR.Models
         public string PatientId { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string FirstName { get; set; } = null!;
+        
         [Required]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; } // changed data type from DateTime, because we don't need the time
         public string? AddressStreet { get; set; }
         public string? AddressCity { get; set; }
         public string? AddressState { get; set; }
