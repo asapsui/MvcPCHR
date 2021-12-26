@@ -2,21 +2,8 @@
 @model MvcPCHR.Models.RegisterViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Register";
 }
-<script>
-        // This script using javascript checks if each textbox is filled
-        // dont need this script as data annoatations and onsubmit can handle this
-        function validateForm() {
-            let x = document.forms["registerform"]["Username"].value;
-            let y = document.forms["loginform"]["Password"].value;
-            if (x == "" || y == "") {
-               alert("All textboxes must be filled!");
-                return false;
-            }
-            return true;
-        }
-</script>
 <style>
     h2 { 
         margin-right: 350px;

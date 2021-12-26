@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using MvcPCHR.Models;
 using System.Data;
@@ -14,7 +15,6 @@ namespace MvcPCHR.Controllers
         {
             _context = context;
         }
-
 
         public IActionResult Index()
         {
@@ -43,6 +43,7 @@ namespace MvcPCHR.Controllers
                     patient.PatientId = Request.Form["PatientId"];
                     patient.FirstName = Request.Form["Firstname"];
                     patient.LastName = Request.Form["Lastname"];
+
                     DateTime dateInput = DateTime.Parse(Request.Form["DateOfBirth"]);
                     patient.DateOfBirth = dateInput;
                     _context.PatientTbls.Add(patient);

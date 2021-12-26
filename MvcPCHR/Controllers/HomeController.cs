@@ -27,65 +27,7 @@ namespace MvcPCHR.Controllers
         {
             return View();
         }
-
-        
-        [HttpPost]
-        [ActionName("Account")]
-        public IActionResult ValidateLogin()
-        {
-            // this method is validating with the database the login information the user has provided
-
-            string username = Request.Form["username"];
-
-            // need to hash this password 
-            string password = Request.Form["password"];
-            var cs = Configuration.GetConnectionString("DefaultConnection");
-            SqlConnection connection = new SqlConnection(cs);
-           
-
-
-            string selectStatement
-                = "SELECT * FROM dbo.PATIENT_TBL WHERE USERNAME=@Username AND PASSWORD =@Password;";
-
-            SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
-            try
-            {
-                connection.Open();
-
-                // associating @username and @password with parameter from the HTML form inputs 
-                selectCommand.Parameters.AddWithValue("@Username", username);
-                selectCommand.Parameters.AddWithValue("@Password", password);
-
-                string userName = (string)selectCommand.ExecuteScalar();
-
-                if (!String.IsNullOrEmpty(userName))
-                {
-                    // use formsauthentication class to set the cookie
-                    // redirect to the personal details page
-                    return RedirectToAction("Privacy", "Home");
-                   
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            // redirect to the login view, which is the home view
-            ViewBag.ErrorMessage = "Login failed. Please try again or register below.";
-            return RedirectToAction("Index","Home");
-            
-           
-        }
-    
-        public IActionResult PersonalDetails()
-        {
-            return View();
-        }
-
+   
         public IActionResult Privacy()
         {
             return View();

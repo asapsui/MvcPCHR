@@ -12,15 +12,18 @@ namespace MvcPCHR.Models
 
         [Required]
         public string? Username { get; set; }
+        
         [Required]
         [DataType(DataType.Password)]
-       // [Range(8,15, ErrorMessage = "The password needs to be at least 8 characters long and 15 characters max")]
+        //[Range(8, 15, ErrorMessage = "The password needs to be at least 8 characters long and 15 characters max")]
+        // this range is not working 
+
         public string? Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Passwords do not match. Try again!")]
-        //[Range(8, 15, ErrorMessage = "The password needs to be at least 8 characters long and 15 characters max")]
+        // [Range(8, 15, ErrorMessage = "The password needs to be at least 8 characters long and 15 characters max")]
         public string? ConfirmPassword { get; set; }
         [Required]
         public string? LastName { get; set; } 

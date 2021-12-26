@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace MvcPCHR.Models
 {
-    public partial class PCHRDBContext : DbContext
+    // since IdentityDbContext inherits from DbContext, we can use one DbContext that contains classes,
+    // identities, and roles.
+    public partial class PCHRDBContext : IdentityDbContext<IdentityUser>
     {
         public PCHRDBContext()
         {
@@ -388,8 +392,8 @@ namespace MvcPCHR.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_TEST_TBL_PATIENT_TBL");
             });
-
             OnModelCreatingPartial(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
