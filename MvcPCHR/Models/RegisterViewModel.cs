@@ -11,18 +11,18 @@ namespace MvcPCHR.Models
         public string PatientId { get; set; } = null!;
 
         [Required]
+
         public string? Username { get; set; }
         
         [Required]
         [DataType(DataType.Password)]
-        //[Range(8, 15, ErrorMessage = "The password needs to be at least 8 characters long and 15 characters max")]
-        // this range is not working 
-
+        [MaxLength(15, ErrorMessage = "The max length is 15!!")]
         public string? Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Passwords do not match. Try again!")]
+        [MaxLength(15, ErrorMessage = "The max length is 15!!")]
         // [Range(8, 15, ErrorMessage = "The password needs to be at least 8 characters long and 15 characters max")]
         public string? ConfirmPassword { get; set; }
         [Required]

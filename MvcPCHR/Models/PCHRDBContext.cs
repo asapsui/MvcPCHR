@@ -38,6 +38,7 @@ namespace MvcPCHR.Models
             }
         }
 
+        //keys of identity tables are being mapped in OnModelCreating
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AllergyTbl>(entity =>
@@ -393,7 +394,8 @@ namespace MvcPCHR.Models
                     .HasConstraintName("FK_TEST_TBL_PATIENT_TBL");
             });
             OnModelCreatingPartial(modelBuilder);
-            base.OnModelCreating(modelBuilder);
+
+            base.OnModelCreating(modelBuilder); // had to call this method
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
