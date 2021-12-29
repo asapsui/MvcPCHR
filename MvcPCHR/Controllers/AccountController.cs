@@ -44,9 +44,17 @@ namespace MvcPCHR.Controllers
             SqlConnection connection = new SqlConnection(cs); //a\\pchr42563.mdf\;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30");
 
 
-
+            /*
             string selectStatement
                 = "SELECT * FROM dbo.PATIENT_TBL WHERE USERNAME=@Username AND PASSWORD=@Password";
+            */
+
+            string selectStatement
+                = "SELECT * " +
+                "FROM dbo.PATIENT_TBL INNER JOIN dbo.PRIMARY_CARE_TBL " +
+                "On dbo.PATIENT_TBL.PRIMARY_ID = dbo.PRIMARY_CARE_TBL.PRIMARY_ID " +
+                "WHERE USERNAME=@Username and PASSWORD=@Password " +
+                "AND dbo.PRIMARY_CARE_TBL.PRIMARY_ID = dbo.PATIENT_TBL.PRIMARY_ID";
 
             SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
             try
@@ -76,7 +84,7 @@ namespace MvcPCHR.Controllers
                         patient.PatientId = (string)patientReader["Patient_Id"];
                         patient.LastName = (string)patientReader["Last_Name"];
                         patient.FirstName = (string)patientReader["First_Name"];
-                        patient.DateOfBirth = (DateTime?)patientReader["Date_Of_Birth"];
+                        patient.DateOfBirth = (DateTime)patientReader["Date_Of_Birth"];
                         
                         // since its DBNUll we can't type cast it to a string, so we have to return the object as a string
                         // ^ doesn't make sense
@@ -84,7 +92,10 @@ namespace MvcPCHR.Controllers
                         patient.AddressCity = patientReader["Address_City"].ToString();
                         patient.AddressState = patientReader["Address_State"].ToString();
                         patient.AddressZip = patientReader["Address_Zip"].ToString();
+                        patient.PhoneHome = patientReader["Phone_Home"].ToString();
+                        patient.PhoneMobile = patientReader["Phone_Mobile"].ToString();
 
+                        // below is data for the primary care provider section
 
 
                         // use formsauthentication class to set the cookie
@@ -115,6 +126,7 @@ namespace MvcPCHR.Controllers
         {
             if (patient == null)
                 return View(); // this view will be a page saying "No customer found"
+           
             
             // need to make it to where you can only view this information, if you are authorized
             var model = new PatientTbl
@@ -124,9 +136,13 @@ namespace MvcPCHR.Controllers
                 PatientId = patient.PatientId,
                 LastName = patient.LastName,
                 FirstName = patient.FirstName,
-                DateOfBirth = patient.DateOfBirth,
-                AddressStreet = patient.AddressStreet
-
+                DateOfBirth = patient.DateOfBirth.Date,
+                AddressStreet = patient.AddressStreet,
+                AddressCity = patient.AddressCity,
+                AddressState = patient.AddressState,
+                AddressZip = patient.AddressZip,
+                PhoneHome = patient.PhoneHome,
+                PhoneMobile = patient.PhoneMobile
             };
             return View("Account_Details", model);
         }

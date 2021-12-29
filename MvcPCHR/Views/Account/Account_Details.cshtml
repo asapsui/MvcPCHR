@@ -8,54 +8,83 @@
 <hr />
 
 <div class="container">
-    <div class="ml-100 d-flex justify-content-start">
         <form asp-action="Edit" asp-controller="Account" name="personalDetails" method="post">
             @using (Html.BeginForm("Edit","Account",FormMethod.Post, new { @class = "form-group" })) {
-                <h4 class="text-start">Login Details</h4>
-                <div class="form-group">
-                   <!-- <label asp-for="Username" class="control-label">Username</label> -->
-                    @Html.LabelFor(model => model.Username)
-                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-                <div class ="form-group">
-                    @Html.LabelFor(model => model.Password)
-                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type= "password" })
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <hr />
-                <h4 class="text-start">Personal Details</h4>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PatientId)
-                    @Html.TextBoxFor(model => model.PatientId, new { @class = "form-control" })
-                    <!-- @Html.ValidationMessageFor(model => model.PatientId) -->
-                    <span asp-validation-for="PatientId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.LastName)
-                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.FirstName)
-                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DateOfBirth)
-                    @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", @type="date" })
-                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                </div>
-                <hr />
-                <h4 class="text-start">Contact Details</h4>
-                 <div class="form-group">
-                    @Html.LabelFor(model => model.AddressStreet)
-                    @Html.TextBoxFor(model => model.AddressStreet, new { @class = "form-control", @type="textarea"})
-                    <span asp-validation-for="AddressStreet" class="text-danger"></span>
-                </div>
-              }
+                <div class="d-flex justify-content-start row col-sm-3">
+                    <h4 class="text-start">Login Details</h4>
+                    <div class="form-group">
+                       <!-- <label asp-for="Username" class="control-label">Username</label> -->
+                        @Html.LabelFor(model => model.Username)
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class ="form-group">
+                        @Html.LabelFor(model => model.Password)
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type= "password" })
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <hr />
+                    <h4 class="text-start">Personal Details</h4>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PatientId)
+                        @Html.TextBoxFor(model => model.PatientId, new { @class = "form-control" })
+                        <!-- @Html.ValidationMessageFor(model => model.PatientId) -->
+                        <span asp-validation-for="PatientId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName)
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName)
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateOfBirth)
+                        @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", @type="datetime" })
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <hr />
+                    <h4 class="text-start">Contact Details</h4>
+                     <div class="form-group">
+                        @Html.LabelFor(model => model.AddressStreet)
+                        @Html.TextBoxFor(model => model.AddressStreet, new { @class = "form-control", @type="textarea"})
+                        <span asp-validation-for="AddressStreet" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AddressState)
+                        @Html.TextBoxFor(model => model.AddressState, new { @class = "form-control", @type="textarea"})
+                        <span asp-validation-for="AddressStreet" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AddressCity)
+                        @Html.TextBoxFor(model => model.AddressCity, new { @class = "form-control", @type="textarea"})
+                        <span asp-validation-for="AddressCity" class="text-danger"></span>
+                    </div>
+                    <!-- add the zip code next to the right of the city text box-->
+                    <div class="form-group" >
+                        @Html.LabelFor(model => model.PhoneHome)
+                        @Html.TextBoxFor(model => model.PhoneHome, new { @class = "form-control"})
+                        <!-- @Html.DisplayFor(model => model.PhoneHome) -->
+                        <span asp-validation-for="PhoneHome" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" >
+                        @Html.LabelFor(model => model.PhoneMobile)
+                        @Html.TextBoxFor(model => model.PhoneMobile, new { @class = "form-control"})
+                        <span asp-validation-for="PhoneMobile" class="text-danger"></span>
+                    </div>
+              </div>
+              <div class="d-flex justify-content-center row"> 
+                  <h4 class="text-center">Primary Care Provider Details</h4>
+                  @Html.LabelFor(model => model.PrimaryId)
+                  @Html.TextBoxFor(model => model.PrimaryId, new { @class = "form-control"})
+                  <span asp-validation-for="PrimaryId" class="text-danger"></span>
+              </div>
+
+                }
         </form>
-    </div>
 </div>
 <!--
 <div>

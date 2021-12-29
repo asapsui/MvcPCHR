@@ -29,18 +29,30 @@ namespace MvcPCHR.Models
         [Required]
         //[DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
-       // [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime? DateOfBirth { get; set; } // changed data type from DateTime, because we don't need the time
+        // DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")] 
+        public DateTime DateOfBirth { get; set; }
         
         [Display(Name = "Street Address")]
         public string? AddressStreet { get; set; }
+
+        [Display(Name = "City")]
         public string? AddressCity { get; set; }
+
+        [Display(Name = "State")]
         public string? AddressState { get; set; }
         
         [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer number")]
         [MaxLength(5, ErrorMessage = "The max length is 15!!")]
+        [Display(Name = "Zip Code")]
         public string? AddressZip { get; set; }
+
+        [Display(Name = "Home Telephone")]
+        [DisplayFormat(DataFormatString = "{0:###-###-####}")] // this may not be working correctly
         public string? PhoneHome { get; set; }
+
+        [Display(Name = "Mobile Telephone")]
+        [DisplayFormat(DataFormatString = "{0:###-###-####}")]
         public string? PhoneMobile { get; set; }
         public string? PrimaryId { get; set; }
         [Required]
