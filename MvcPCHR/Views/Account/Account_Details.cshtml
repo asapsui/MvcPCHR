@@ -1,173 +1,63 @@
-﻿@model MvcPCHR.Models.PatientTbl
+﻿<!-- can only include one model per view, so thats we need the multi-model -->
+@model MvcPCHR.Models.AccountDetailsViewModel
 
 @{
-    ViewData["Title"] = "Account_Details";
+    // 
+    //ViewData["Title"] = "Account_Details";
+    ViewBag.Title = "Account Details";
 }
 
 <h1>Account Details</h1>
 <hr />
 
-<div class="container">
-        <form asp-action="Edit" asp-controller="Account" name="personalDetails" method="post">
-            @using (Html.BeginForm("Edit","Account",FormMethod.Post, new { @class = "form-group" })) {
-                <div class="d-flex justify-content-start row col-sm-3">
-                    <h4 class="text-start">Login Details</h4>
-                    <div class="form-group">
-                       <!-- <label asp-for="Username" class="control-label">Username</label> -->
-                        @Html.LabelFor(model => model.Username)
-                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
-                        <span asp-validation-for="Username" class="text-danger"></span>
-                    </div>
-                    <div class ="form-group">
-                        @Html.LabelFor(model => model.Password)
-                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type= "password" })
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <hr />
-                    <h4 class="text-start">Personal Details</h4>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.PatientId)
-                        @Html.TextBoxFor(model => model.PatientId, new { @class = "form-control" })
-                        <!-- @Html.ValidationMessageFor(model => model.PatientId) -->
-                        <span asp-validation-for="PatientId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.LastName)
-                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
-                        <span asp-validation-for="LastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FirstName)
-                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.DateOfBirth)
-                        @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", @type="datetime" })
-                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                    </div>
-                    <hr />
-                    <h4 class="text-start">Contact Details</h4>
-                     <div class="form-group">
-                        @Html.LabelFor(model => model.AddressStreet)
-                        @Html.TextBoxFor(model => model.AddressStreet, new { @class = "form-control", @type="textarea"})
-                        <span asp-validation-for="AddressStreet" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AddressState)
-                        @Html.TextBoxFor(model => model.AddressState, new { @class = "form-control", @type="textarea"})
-                        <span asp-validation-for="AddressStreet" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AddressCity)
-                        @Html.TextBoxFor(model => model.AddressCity, new { @class = "form-control", @type="textarea"})
-                        <span asp-validation-for="AddressCity" class="text-danger"></span>
-                    </div>
-                    <!-- add the zip code next to the right of the city text box-->
-                    <div class="form-group" >
-                        @Html.LabelFor(model => model.PhoneHome)
-                        @Html.TextBoxFor(model => model.PhoneHome, new { @class = "form-control"})
-                        <!-- @Html.DisplayFor(model => model.PhoneHome) -->
-                        <span asp-validation-for="PhoneHome" class="text-danger"></span>
-                    </div>
-                    <div class="form-group" >
-                        @Html.LabelFor(model => model.PhoneMobile)
-                        @Html.TextBoxFor(model => model.PhoneMobile, new { @class = "form-control"})
-                        <span asp-validation-for="PhoneMobile" class="text-danger"></span>
-                    </div>
-              </div>
-              <div class="d-flex justify-content-center row"> 
-                  <h4 class="text-center">Primary Care Provider Details</h4>
-                  @Html.LabelFor(model => model.PrimaryId)
-                  @Html.TextBoxFor(model => model.PrimaryId, new { @class = "form-control"})
-                  <span asp-validation-for="PrimaryId" class="text-danger"></span>
-              </div>
 
-                }
-        </form>
+
+<div class="container mt-5">
+    <div class="row g-3">
+            @using (Html.BeginForm("Account_Details", "Account", FormMethod.Post))
+             {
+                <div class="col-sm-3">
+                    <h4 class="text-start">Login Details</h4>
+                    <hr />
+                    @Html.LabelFor(model => model.Patient.Username)
+                    @Html.TextBoxFor(model => model.Patient.Username, new { @class = "form-control" })
+                    <span asp-validation-for="Patient.Username" class="text-danger"></span>
+
+                    <div class ="form-group mt-3">
+                        @Html.LabelFor(model => model.Patient.Password)
+                        @Html.TextBoxFor(model => model.Patient.Password, new { @class = "form-control", @type= "password" })
+                        <span asp-validation-for="Patient.Password" class="text-danger"></span>
+                    </div>
+
+                    <h4 class="text-start mt-3">Personal Details</h4>
+                    <hr />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Patient.PatientId)
+                        @Html.TextBoxFor(model => model.Patient.PatientId, new { @class = "form-control" })
+                        <span asp-validation-for="Patient.PatientId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        @Html.LabelFor(model => model.Patient.LastName)
+                        @Html.TextBoxFor(model => model.Patient.LastName, new { @class = "form-control" })
+                        <span asp-validation-for="Patient.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        @Html.LabelFor(model => model.Patient.FirstName)
+                        @Html.TextBoxFor(model => model.Patient.FirstName, new { @class = "form-control" })
+                        <span asp-validation-for="Patient.FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <h4 class="text-start">Primary Care Provider Details</h4>
+                    <hr />
+                    @Html.LabelFor(model => model.PrimaryCare.PrimaryId)
+                    @Html.TextBoxFor(model => model.PrimaryCare.PrimaryId, new { @class = "form-control"})
+                     <span asp-validation-for="PrimaryCare.PrimaryId" class="text-danger"></span>
+                </div>
+             }
+    </div>
 </div>
-<!--
-<div>
-     <h4>PatientTbl</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2"> This was commented out
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-           @Html.Display("LastName") This was commented out
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfBirth)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AddressStreet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AddressStreet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AddressCity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AddressCity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AddressState)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AddressState)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AddressZip)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AddressZip)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneHome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneHome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneMobile)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneMobile)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrimaryId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrimaryId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-    </dl>
-</div>
- -->
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.PatientId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+        
+
+ 

@@ -29,7 +29,7 @@ namespace MvcPCHR.Controllers
         // GET: AccountController
         // here we will be validating the login
         [HttpPost]
-        [ActionName("ValidateLogin")]
+        [ActionName("Account_Details")]
         public IActionResult Index()
         {
             // this method is validating with the database the login information the user has provided
@@ -78,6 +78,7 @@ namespace MvcPCHR.Controllers
                     */
                     while (patientReader.Read())
                     {
+
                         PatientTbl patient = new PatientTbl();
                         patient.Username = username;
                         patient.Password = password;
@@ -95,15 +96,37 @@ namespace MvcPCHR.Controllers
                         patient.PhoneHome = patientReader["Phone_Home"].ToString();
                         patient.PhoneMobile = patientReader["Phone_Mobile"].ToString();
 
+                        // creating an instance of the PrimaryCareTbl
+                        PrimaryCareTbl patientPrimaryCare = new PrimaryCareTbl();
+
                         // below is data for the primary care provider section
 
+                        patientPrimaryCare.PrimaryId = (string)patientReader["Primary_Id"];
+                        patientPrimaryCare.NameLast = patientReader["Name_Last"].ToString();
+                        patientPrimaryCare.NameFisrt = patientReader["Name_Fisrt"].ToString();
+                        patientPrimaryCare.NameLast = patientReader["Name_Last"].ToString();
+                        patientPrimaryCare.Title = patientReader["Title"].ToString();
+                        patientPrimaryCare.Specialty = patientReader["Specialty"].ToString();
+                        patientPrimaryCare.PhoneOffice = patientReader["Phone_Office"].ToString();
+                        patientPrimaryCare.PhoneMobile = patientReader["Phone_Mobile"].ToString();
+
+                        // setting the fields of my ViewModel equal to the instances of the PatientTbl and PrimaryCareTbl
+                        var viewModel = new AccountDetailsViewModel()
+                        {
+                            Patient = patient,
+                            PrimaryCare = patientPrimaryCare
+                        };
 
                         // use formsauthentication class to set the cookie
-                        // redirect to the personal details page
-                        return RedirectToAction("Account_Details", "Account", patient);
+                        // redirect to the personal details page (to pass two routeValues, I had to use the new and brackets)
+
+                        // instead of passing the object(s) to the Account_Details method, we can just
+                        //   do that here
+
+                        // need to handle if our patient or primarycare table are null, just return
+                        return View("Account_Details", viewModel);
                     }
                     patientReader.Close();
-                    
 
                 }
             }
@@ -116,36 +139,23 @@ namespace MvcPCHR.Controllers
                 connection.Close();
             }
             // redirect to the login view, which is the home view
-            ViewBag.ErrorMessage = "Login failed. Please try again or register below.";
-            return RedirectToAction("Privacy", "Home");
+            return RedirectToAction("LoginFailed", "Home");
         }
 
         // GET: AccountController/Account_Details
+        /*
+         * if we use HttpGet it won't hide the users information from the URL, so it'll bind it
+         * 
+         * But if we use HttpPost it will hide this sensitive information from the URL
+         */
+        
+        
         [HttpGet]
-        public ActionResult Account_Details(PatientTbl patient)
+        /*
+        public ActionResult Account_Details(PatientTbl patient, PrimaryCareTbl primaryCare)
         {
-            if (patient == null)
-                return View(); // this view will be a page saying "No customer found"
-           
-            
-            // need to make it to where you can only view this information, if you are authorized
-            var model = new PatientTbl
-            {
-                Username = patient.Username,
-                Password = patient.Password,
-                PatientId = patient.PatientId,
-                LastName = patient.LastName,
-                FirstName = patient.FirstName,
-                DateOfBirth = patient.DateOfBirth.Date,
-                AddressStreet = patient.AddressStreet,
-                AddressCity = patient.AddressCity,
-                AddressState = patient.AddressState,
-                AddressZip = patient.AddressZip,
-                PhoneHome = patient.PhoneHome,
-                PhoneMobile = patient.PhoneMobile
-            };
-            return View("Account_Details", model);
         }
+        */
 
         // GET: AccountController/Details/5
         public ActionResult Details(int id)

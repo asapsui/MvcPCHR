@@ -27,6 +27,14 @@ namespace MvcPCHR.Controllers
         {
             return View();
         }
+
+        // I could make another method with the name Index, but with parameters
+        // this is bad practice, but it was a workaround
+        // only thing different in this view, is the p class with login failed text
+        public IActionResult LoginFailed()
+        {
+            return View();
+        }
    
         public IActionResult Privacy()
         {
