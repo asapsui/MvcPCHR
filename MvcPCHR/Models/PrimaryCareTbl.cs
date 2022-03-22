@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MvcPCHR.Models
 {
     public partial class PrimaryCareTbl
     {
+        [Display(Name="Primary ID")]
         public string PrimaryId { get; set; } = null!;
         public string? NameLast { get; set; }
         public string? NameFisrt { get; set; }
