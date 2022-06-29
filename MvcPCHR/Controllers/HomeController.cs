@@ -41,6 +41,8 @@ namespace MvcPCHR.Controllers
             string password = Request.Form["password"];
             var cs = Configuration.GetConnectionString("DefaultConnection");
             SqlConnection connection = new SqlConnection(cs);
+
+            var random = "this is a random string";
            
 
 

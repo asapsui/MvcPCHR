@@ -10,7 +10,7 @@ namespace MvcPCHR.Controllers
     public class PatientController : Controller
     {
 
-       
+       // hopefully this shows up
 
         public IEnumerable<PatientTbl> Index()
         {
