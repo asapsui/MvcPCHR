@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// this is the model class of the MVC design
 namespace MvcPCHR.Models
 {
     public partial class Condition
