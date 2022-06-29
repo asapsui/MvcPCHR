@@ -5,18 +5,25 @@
     // 
     //ViewData["Title"] = "Account_Details";
     ViewBag.Title = "Account Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Account Details</h1>
 <hr />
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.css"/>
 
+</head>
+<body>
 @using (Html.BeginForm("Account_Details", "Account", FormMethod.Post))
 {
     <div class="container">
-        <div class="row">
+        <div class="row g-5">
 
-            <div class="col">
+            <div class="col-sm-5">
                 <h4 class="text-start">Login Details</h4>
                 <hr />
                 @Html.LabelFor(model => model.Patient.Username)
@@ -49,14 +56,14 @@
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col-sm-5">
                 <h4 class="text-start">Primary Care Provider Details</h4>
                 <hr />
                 @Html.LabelFor(model => model.PrimaryCare.PrimaryId)
                 @Html.TextBoxFor(model => model.PrimaryCare.PrimaryId, new { @class = "form-control"})
                 <span asp-validation-for="PrimaryCare.PrimaryId" class="text-danger"></span>
             </div>
-            <div class="col">
+            <div class="col-sm-2">
                 <h4 class="text-start">Login Details</h4>
                 <hr />
             </div>
@@ -64,7 +71,6 @@
         </div>
     </div>
 }
-
-        
-
+</body>
+</html>
  

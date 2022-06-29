@@ -26,6 +26,10 @@ namespace MvcPCHR.Controllers
             Configuration = Config;
         }
 
+        public AccountController()
+        {
+        }
+
         // GET: AccountController
         // here we will be validating the login
         [HttpPost]

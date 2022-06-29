@@ -48,3 +48,7 @@ form {
     height: 42px;
     margin-left: 500px;
 }
+
+.container {
+    width: 100%;
+}

@@ -34,7 +34,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// this forces the user to use a secure line
 app.UseHttpsRedirection();
+
+// this is added so the application can use the static files that we add in wwwroot
 app.UseStaticFiles();
 
 app.UseRouting();
